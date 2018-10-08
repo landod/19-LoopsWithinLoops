@@ -123,7 +123,7 @@ def triangle_of_stars(r):
     # ------------------------------------------------------------------
 
     for k in range(r):
-        for k in range(k+1):
+        for j in range(k+1):
             print('*', end='')
         print()
 
