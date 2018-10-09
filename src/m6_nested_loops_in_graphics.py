@@ -83,29 +83,27 @@ def draw_L(window, circle, r, c):
     # TODO: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
-    new_circle = circle.clone()
-    new_circle.fill_color = circle.fill_color
-    point = new_circle.center
-    x = point.x
-    y = point.y
-    for k in range(r-2):
-        new_circle.move_center_to(x, y)
-        new_circle.move_by(0, 2*circle.radius*k)
-        for j in range(3):
-            new_circle.move_by(2*circle.radius, 0)
-            new_circle.attach_to(window)
-            window.render(0.5)
+    point = circle.center
+    color = circle.fill_color
+    rad = circle.radius
+    new_circle = rg.Circle(point, rad)
+    x1 = point.x
+    y1 = point.y
 
-    point = new_circle.center
-    x = point.x
-    y = point.y
-    for k in range(3):
-        new_circle.move_center_to(x, y)
-        new_circle.move_by(0, 2 * circle.radius * k)
-        for j in range(c):
-            new_circle.move_by(2 * circle.radius, 0)
+    for k in range(r-2):
+        point = new_circle.center
+        x = point.x
+        y = point.y
+        new_circle = rg.Circle(rg.Point(x1, y1 + (2*rad)), rad)
+        for j in range(3):
+            point = new_circle.center
+            x = point.x
+            y = point.y
+            new_circle = rg.Circle(rg.Point(x+(2*rad), y), rad)
             new_circle.attach_to(window)
-            window.render(0.5)
+            window.render()
+
+
 
 
 def run_test_draw_wall_on_right():
@@ -147,7 +145,18 @@ def draw_wall_on_right(rectangle, n, window):
     # TODO: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    rectangle.attach_to(window)
+    window.render()
+    new_rect = rectangle.clone()
+    x = new_rect.get_upper_right_corner()
+    y = new_rect.get_lower_left_corner()
+    h = new_rect.get_height()
+    w = new_rect.get_width()
 
+    for k in range(n):
+        rect = rg.Rectangle(rg.Point(x.x, x.y + (h * k)), rg.Point(y.x, y.y + (h * k)))
+        rect.attach_to(window)
+        window.render(0.2)
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
