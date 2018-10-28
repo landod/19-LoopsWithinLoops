@@ -267,7 +267,7 @@ def triangle_same_number_in_each_row(r):
     #   would defeat the goal of providing practice at loops within loops.
     # ------------------------------------------------------------------
 
-    for k in range(r):
+    for k in range(1, r):
         for j in range(k+1):
             print(str(k+1), end='')
         print()
